@@ -171,8 +171,8 @@ footer{padding:30px 0 40px;text-align:center;font-family:var(--mono);font-size:1
       <div class="about reveal">
         <div class="kicker">describe('quem sou eu')</div>
         <h2>Do chão de fábrica para a qualidade de software.</h2>
-        <p>Comecei como <strong>jovem aprendiz em usinagem</strong> e passei 8 anos como <strong>programador CNC</strong>. Esse tempo na produção me deu algo raro em QA: eu sei como o sistema é usado de verdade, na linha, por quem precisa que ele funcione.</p>
-        <p>Depois migrei para a TI: primeiro no <strong>suporte de sistemas N3</strong> (GLPI, Grafana, SQL, integração com CLPs e OPC UA) e depois como <strong>Analista de Testes</strong> em sistemas MES/LES, rastreabilidade e apontamento de produção.</p>
+        <p>Minha história com qualidade começou antes da TI. Foram mais de 10 anos entre <strong>usinagem e programação CNC</strong>, onde um décimo de milímetro fora da medida vira peça refugada. Ali aprendi a desconfiar do "tá funcionando", conferir duas vezes e registrar tudo.</p>
+        <p>Em 2022 virei a chave para a TI: primeiro no <strong>suporte de sistemas N3</strong> (GLPI, Grafana, SQL, integração com CLPs e OPC UA) e depois como <strong>Analista de Testes</strong> em sistemas MES/LES, rastreabilidade e apontamento de produção. Hoje junto os dois lados: entendo o sistema por dentro e entendo quem usa, porque já estive na linha de produção precisando que ele funcionasse.</p>
         <p>Formado em <strong>Análise e Desenvolvimento de Sistemas</strong> (ULBRA) e cursando pós em <strong>Engenharia de Software com ênfase em Qualidade e Teste</strong> (Anhanguera).</p>
       </div>
       <div class="stats reveal">
@@ -240,17 +240,21 @@ footer{padding:30px 0 40px;text-align:center;font-family:var(--mono);font-size:1
           <p>Central que reúne WhatsApp comum e WhatsApp Business numa só tela. A equipe alterna entre números, organiza contas por setor, acompanha indicadores de atendimento e vendas e agenda campanhas com envio automático para contatos autorizados, respeitando intervalos e mostrando o status de cada mensagem. Desenvolvido em dupla com João Matheus Borba.</p>
           <div class="tags"><span>Automação</span><span>Integração de APIs</span><span>WhatsApp API</span><span>Dashboards</span></div>
         </article>
-        <article class="proj todo reveal">
-          <span class="badge" style="align-self:flex-start">EM BREVE</span>
-          <h3>Automação E2E</h3>
-          <p>Espaço para um repositório com testes end-to-end em Playwright/Cypress (ex.: um e-commerce de demonstração), com page objects e relatório no CI.</p>
-          <div class="tags"><span>Playwright</span><span>Cypress</span><span>GitHub Actions</span></div>
+        <article class="proj reveal">
+          <span class="badge" style="align-self:flex-start">AUTOMAÇÃO E2E</span>
+          <h3>qa-playwright-e2e</h3>
+          <img src="https://github.com/jardel-mateus/qa-playwright-e2e/actions/workflows/testes.yml/badge.svg" alt="status dos testes" style="height:20px;align-self:flex-start">
+          <p>Testes end-to-end de uma loja (Sauce Demo) com Playwright + TypeScript: login, carrinho, ordenação e checkout. São 18 cenários com page objects, em desktop e mobile, rodando no GitHub Actions com relatório publicado.</p>
+          <div class="tags"><span>Playwright</span><span>TypeScript</span><span>Page Objects</span><span>GitHub Actions</span></div>
+          <div class="cta" style="margin:0"><a class="btn" href="https://github.com/jardel-mateus/qa-playwright-e2e" target="_blank" rel="noopener">Código ↗</a><a class="btn" href="https://jardel-mateus.github.io/qa-playwright-e2e/" target="_blank" rel="noopener">Relatório ↗</a></div>
         </article>
-        <article class="proj todo reveal">
-          <span class="badge" style="align-self:flex-start">EM BREVE</span>
-          <h3>Testes de API</h3>
-          <p>Espaço para uma coleção de testes de API com Postman/Insomnia e asserções automatizadas, documentando casos e evidências.</p>
-          <div class="tags"><span>Postman</span><span>Insomnia</span><span>REST</span></div>
+        <article class="proj reveal">
+          <span class="badge" style="align-self:flex-start">TESTES DE API</span>
+          <h3>qa-api-serverest</h3>
+          <img src="https://github.com/jardel-mateus/qa-api-serverest/actions/workflows/api.yml/badge.svg" alt="status dos testes" style="height:20px;align-self:flex-start">
+          <p>Coleção do Postman rodando com Newman contra a API ServeRest: usuários, login com token, CRUD de produtos e limpeza no final. São 16 requisições e 34 asserções, no CI todo dia útil.</p>
+          <div class="tags"><span>Postman</span><span>Newman</span><span>REST</span><span>GitHub Actions</span></div>
+          <div class="cta" style="margin:0"><a class="btn" href="https://github.com/jardel-mateus/qa-api-serverest" target="_blank" rel="noopener">Código ↗</a><a class="btn" href="https://jardel-mateus.github.io/qa-api-serverest/" target="_blank" rel="noopener">Relatório ↗</a></div>
         </article>
       </div>
     </div>

@@ -98,6 +98,13 @@ ul.ck li::before{content:"✓";position:absolute;left:0;color:var(--pass);font-f
 .who .l{color:var(--muted);font-size:13.5px}
 .otw{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:11px;font-weight:800;color:#06110a;background:var(--pass);padding:3px 8px;border-radius:6px}
 .box{border:1px solid var(--line);background:#121a23;border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.tline{margin:4px 0 16px 6px;padding-left:18px;border-left:2px solid var(--line)}
+.tline div{position:relative;padding:5px 0;font-size:14.5px}
+.tline div::before{content:"";position:absolute;left:-26px;top:11px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--pass)}
+.tline b{font-family:var(--mono);color:var(--pass);margin-right:10px}
+.ci{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:2px 0 10px}
+.ci img{height:20px}
+.body code{font-family:var(--mono);font-size:13px;background:#1b2633;padding:1px 5px;border-radius:4px}
 
 #intro{position:fixed;inset:0;z-index:30;display:grid;place-items:center;text-align:center;padding:20px;
   background:radial-gradient(ellipse at center,rgba(5,20,32,.35),rgba(3,10,16,.85));transition:opacity .7s}
@@ -143,13 +150,14 @@ ul.ck li::before{content:"✓";position:absolute;left:0;color:var(--pass);font-f
 <div class="hud tr">
   <span class="pill glass">🏝 <b id="hIsl">0</b>/7</span>
   <span class="pill glass">🐞 <b id="hBug">0</b>/8</span>
+  <button class="pill glass" id="nightBtn" title="Ver à noite">🌙</button>
   <button class="pill hl" id="recBtn">👔 Modo recrutador</button>
   <a class="pill glass wide" href="cv.html" target="_blank" rel="noopener">📄 CV</a>
   <a class="pill glass wide" href="classic.html">versão clássica</a>
 </div>
 <div class="hud goal" id="goal"></div>
 <canvas id="mini"></canvas>
-<div class="hud hint glass" id="hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> navegar · <kbd>E</kbd> atracar · <kbd>R</kbd> recrutador · roda do mouse = zoom</div>
+<div class="hud hint glass" id="hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> navegar · <kbd>E</kbd> atracar · <kbd>Shift</kbd> turbo · <kbd>N</kbd> noite · <kbd>R</kbd> recrutador · roda = zoom</div>
 <button class="dock" id="dock">⚓ Atracar em <b id="dockName"></b><kbd>E</kbd></button>
 <div id="joy"><div id="knob"></div></div>
 
@@ -195,14 +203,24 @@ const ISL=[
  {id:'farol',name:'Farol do Início',kick:'README.md',icon:'🗼',x:0,z:0,r:16,color:'#4f9e5f',ly:24,
   html:`<p>Bem-vindo a bordo! Este é o portfólio do <strong>Jardel Mateus</strong>, Analista de Testes (QA) com experiência em sistemas de manufatura, SQL Server e automação de testes.</p>
   <h3>Controles</h3>
-  <div class="ctrls"><span><kbd>W</kbd> <kbd>↑</kbd></span><span>acelerar</span><span><kbd>A</kbd> <kbd>D</kbd></span><span>virar</span><span><kbd>S</kbd> <kbd>↓</kbd></span><span>frear / ré</span><span><kbd>E</kbd></span><span>atracar na ilha</span><span><kbd>R</kbd></span><span>modo recrutador</span><span>🖱️</span><span>segure o clique no mar pra ir até lá · roda = zoom</span><span>📱</span><span>use o joystick no canto da tela</span></div>
+  <div class="ctrls"><span><kbd>W</kbd> <kbd>↑</kbd></span><span>acelerar</span><span><kbd>A</kbd> <kbd>D</kbd></span><span>virar</span><span><kbd>S</kbd> <kbd>↓</kbd></span><span>frear / ré</span><span><kbd>E</kbd></span><span>atracar na ilha</span><span><kbd>Shift</kbd></span><span>turbo 💨</span><span><kbd>N</kbd> 🌙</span><span>alternar dia e noite</span><span><kbd>R</kbd></span><span>modo recrutador</span><span>🖱️</span><span>segure o clique no mar pra ir até lá · roda = zoom</span><span>📱</span><span>use o joystick no canto da tela</span></div>
   <p>A <strong>seta verde</strong> em cima do barco aponta pra próxima ilha. As boias com <strong>feixe vermelho</strong> são bugs: passe por cima pra reportar.</p>
   <p style="color:var(--muted);font-size:13.5px">Tem pressa? Clique em <b>👔 Modo recrutador</b> ou veja a <a href="classic.html" style="color:var(--pass)">versão clássica</a>.</p>`},
  {id:'sobre',name:'Ilha do Testador',kick:"describe('quem sou eu')",icon:'🧪',x:-130,z:-100,r:26,color:'#3e9a5c',ly:22,
   html:`<div class="who"><div class="photo"></div><div><h3>Jardel Mateus</h3><div class="r">Analista de Testes · QA · Suporte de Sistemas</div><div class="l">Não-Me-Toque, RS · presencial, híbrido ou remoto</div><span class="otw">#OPENTOWORK</span></div></div>
-  <p>Comecei como <strong>jovem aprendiz em usinagem</strong> e passei 8 anos como <strong>programador CNC</strong>. Esse tempo na produção me deu algo raro em QA: eu sei como o sistema é usado de verdade, na linha, por quem precisa que ele funcione.</p>
-  <p>Depois migrei pra TI: primeiro no <strong>suporte de sistemas N3</strong> (GLPI, Grafana, SQL, CLPs e OPC UA) e depois como <strong>Analista de Testes</strong> em sistemas MES/LES, rastreabilidade e apontamento de produção.</p>
-  <p>Formado em <strong>Análise e Desenvolvimento de Sistemas</strong> (ULBRA) e cursando pós em <strong>Engenharia de Software com ênfase em Qualidade e Teste</strong> (Anhanguera).</p>
+  <p>Minha história com qualidade começou antes da TI, <strong>no chão de fábrica</strong>. Foram mais de 10 anos entre usinagem e programação CNC, onde um décimo de milímetro fora da medida vira peça refugada. Ali aprendi a desconfiar do "tá funcionando", conferir duas vezes e registrar tudo.</p>
+  <span class="k">// LINHA DO TEMPO</span>
+  <div class="tline">
+   <div><b>2012</b>Jovem aprendiz em usinagem (SENAI)</div>
+   <div><b>2014</b>Programador CNC: 8 anos na produção</div>
+   <div><b>2022</b>Virei a chave pra TI: suporte de sistemas N3 na Stara</div>
+   <div><b>2023</b>Formado em Análise e Desenvolvimento de Sistemas (ULBRA)</div>
+   <div><b>2024</b>Analista de Testes: QA de sistemas MES/LES, OEE e rastreabilidade</div>
+   <div><b>2026</b>Pós em Qualidade e Teste de Software + automação com Playwright e Postman</div>
+  </div>
+  <p>Hoje eu junto os dois lados: <strong>entendo o sistema por dentro</strong> (SQL, logs, integrações com CLP) e <strong>entendo quem usa</strong>, porque já estive na linha de produção precisando que o sistema funcionasse.</p>
+  <span class="k">// COMO EU TESTO</span>
+  <ul class="ck" style="margin-bottom:14px"><li>Converso com quem usa e entendo a regra de negócio antes de escrever o cenário</li><li>Valido na tela e no banco: o dado tem que bater no SQL Server</li><li>Bug reportado com passo a passo, evidência e impacto pro usuário</li><li>Reteste e regressão antes de cada release</li><li>Automatizo o que se repete pra sobrar tempo pro teste exploratório</li></ul>
   <div class="stats"><div class="stat"><b>14+</b><span>anos na indústria</span></div><div class="stat"><b>4+</b><span>anos em TI</span></div><div class="stat"><b>N3</b><span>suporte avançado</span></div><div class="stat"><b>SQL</b><span>validação no banco</span></div></div>`},
  {id:'exp',name:'Arquipélago da Carreira',kick:'npm run test:carreira',icon:'🏭',x:150,z:-110,r:30,color:'#5a923f',ly:26,
   html:`<div class="job"><span class="badge">PASS</span><div class="top"><h3>Analista de Testes</h3><span class="when">jan/2024 – jul/2026</span></div><div class="where">Stara S/A · Não-Me-Toque/RS</div><ul class="ck">
@@ -212,10 +230,10 @@ const ISL=[
   <div class="job"><span class="badge">PASS</span><div class="top"><h3>Programador CNC</h3><span class="when">ago/2014 – ago/2022</span></div><div class="where">Implementos Agrícolas Jan · Não-Me-Toque/RS</div><ul class="ck"><li>Operação e programação CNC em produção industrial</li><li>Acompanhamento de padrões de qualidade no ambiente fabril</li></ul></div>
   <div class="job"><span class="badge">PASS</span><div class="top"><h3>Jovem Aprendiz · Mecânico de Usinagem</h3><span class="when">abr/2012 – abr/2014</span></div><div class="where">JAN · Não-Me-Toque/RS</div><ul class="ck"><li>Onde tudo começou: precisão e atenção aos detalhes</li></ul></div>`},
  {id:'proj',name:'Porto dos Projetos',kick:'ls ./projetos',icon:'🚀',x:205,z:85,r:28,color:'#2f8f78',ly:30,
-  html:`<div class="job"><span class="badge">NO AR</span><h3>Nexo Ops</h3><p style="margin:6px 0 10px">Central que reúne WhatsApp comum e WhatsApp Business numa tela só. A equipe alterna entre números, organiza contas por setor, acompanha indicadores de atendimento e vendas e agenda campanhas com envio automático pra contatos autorizados, respeitando intervalos e mostrando o status de cada mensagem. Feito em dupla com João Matheus Borba.</p><div class="chips" style="margin:0"><span>Automação</span><span>Integração de APIs</span><span>WhatsApp API</span><span>Dashboards</span></div></div>
-  <div class="job"><span class="badge">VOCÊ ESTÁ AQUI</span><h3>QA Voyage 3D</h3><p style="margin:6px 0 10px">Este portfólio: um mundo 3D em WebGL com oceano em shader, física de barco, minimapa, modo recrutador e 8 bugs pra caçar.</p><div class="chips" style="margin:0"><span>Three.js</span><span>WebGL / GLSL</span><span>JavaScript</span></div></div>
-  <div class="job"><span class="badge soon">EM BREVE</span><h3>Automação E2E</h3><p style="margin:6px 0 10px">Testes end-to-end com Playwright/Cypress, page objects e relatório rodando no CI.</p><div class="chips" style="margin:0"><span>Playwright</span><span>Cypress</span><span>GitHub Actions</span></div></div>
-  <div class="job"><span class="badge soon">EM BREVE</span><h3>Testes de API</h3><p style="margin:6px 0 10px">Coleção de testes de API com Postman/Insomnia e asserções automatizadas.</p><div class="chips" style="margin:0"><span>Postman</span><span>Insomnia</span><span>REST</span></div></div>`},
+  html:`<div class="job"><span class="badge">AUTOMAÇÃO E2E</span><h3>qa-playwright-e2e</h3><div class="ci"><img src="${GH}/qa-playwright-e2e/actions/workflows/testes.yml/badge.svg" alt="status dos testes"></div><p style="margin:0 0 10px">Testes end-to-end de uma loja (Sauce Demo) com <strong>Playwright + TypeScript</strong>: login, carrinho, ordenação e checkout com cálculo de total. São 18 cenários com page objects, rodando em desktop e mobile. Os bugs conhecidos do site ficam documentados com <code>test.fail</code>. O GitHub Actions roda tudo a cada push e todo dia útil, e publica o relatório.</p><div class="chips"><span>Playwright</span><span>TypeScript</span><span>Page Objects</span><span>GitHub Actions</span></div><div class="btns" style="margin:0"><a class="btn" href="${GH}/qa-playwright-e2e" target="_blank" rel="noopener">⌨ Código ↗</a><a class="btn" href="https://jardel-mateus.github.io/qa-playwright-e2e/" target="_blank" rel="noopener">📊 Relatório ↗</a></div></div>
+  <div class="job"><span class="badge">TESTES DE API</span><h3>qa-api-serverest</h3><div class="ci"><img src="${GH}/qa-api-serverest/actions/workflows/api.yml/badge.svg" alt="status dos testes"></div><p style="margin:0 0 10px">Coleção do <strong>Postman</strong> rodando com <strong>Newman</strong> contra a API ServeRest: cadastro e validação de usuários, login com token, CRUD de produtos e limpeza no final. São 16 requisições e 34 asserções de status, mensagens, dados e tempo de resposta.</p><div class="chips"><span>Postman</span><span>Newman</span><span>REST</span><span>GitHub Actions</span></div><div class="btns" style="margin:0"><a class="btn" href="${GH}/qa-api-serverest" target="_blank" rel="noopener">⌨ Código ↗</a><a class="btn" href="https://jardel-mateus.github.io/qa-api-serverest/" target="_blank" rel="noopener">📊 Relatório ↗</a></div></div>
+  <div class="job"><span class="badge">NO AR</span><h3>Nexo Ops</h3><p style="margin:6px 0 10px">Central que reúne WhatsApp comum e WhatsApp Business numa tela só. A equipe alterna entre números, organiza contas por setor, acompanha indicadores de atendimento e vendas e agenda campanhas com envio automático pra contatos autorizados, respeitando intervalos e mostrando o status de cada mensagem. Feito em dupla com João Matheus Borba.</p><div class="chips" style="margin:0"><span>Automação</span><span>Integração de APIs</span><span>WhatsApp API</span><span>Dashboards</span></div></div>
+  <div class="job"><span class="badge">VOCÊ ESTÁ AQUI</span><h3>QA Voyage 3D</h3><p style="margin:6px 0 10px">Este portfólio: um mundo 3D em WebGL com oceano em shader, física de barco, minimapa, modo recrutador e 8 bugs pra caçar.</p><div class="chips" style="margin:0"><span>Three.js</span><span>WebGL / GLSL</span><span>JavaScript</span></div></div>`},
  {id:'skills',name:'Ilha do Arsenal',kick:'expect(skills).toContain(...)',icon:'🛠️',x:-5,z:170,r:27,color:'#6a8d39',ly:22,
   html:`<span class="k">// QUALIDADE</span><div class="chips"><span>Testes funcionais</span><span>Testes manuais</span><span>Cenários de teste</span><span>Regressão</span><span>Gestão de bugs</span><span>Evidências</span></div>
   <span class="k">// AUTOMAÇÃO</span><div class="chips"><span>Cypress</span><span>Playwright</span><span>Selenium</span><span>Postman</span><span>Insomnia</span><span>APIs REST</span></div>
@@ -238,10 +256,13 @@ const RECRUITER={icon:'👔',kick:'resumo em 30 segundos',name:'Modo recrutador'
   <li><strong>4+ anos em TI</strong>: QA em sistemas de manufatura (MES/LES, OEE, rastreabilidade) e suporte N3</li>
   <li><strong>SQL Server</strong> no dia a dia pra validar dados e regras de negócio direto no banco</li>
   <li><strong>Jira + TestRail</strong>: rastreabilidade requisito → teste → resultado, em times Scrum/Kanban</li>
-  <li><strong>Automação</strong>: Cypress, Playwright e Selenium · APIs com Postman e Insomnia</li>
+  <li><strong>Automação</strong>: Playwright + TypeScript e Postman/Newman com CI no GitHub Actions (código aberto, links abaixo) · também Cypress e Selenium</li>
   <li><strong>10 anos de chão de fábrica</strong>: entendo o usuário final da indústria como poucos QAs</li>
   <li>Treinamento de usuários a cada entrega: <strong>comunicação</strong> com dev, produto e operação</li>
   <li>Formado em <strong>ADS</strong> (ULBRA) · cursando pós em <strong>Engenharia de Software com ênfase em Qualidade e Teste</strong></li></ul></div>
+ <div class="box"><span class="k" style="margin-top:0">// VEJA O CÓDIGO</span><ul class="ck">
+  <li><a href="${GH}/qa-playwright-e2e" target="_blank" rel="noopener" style="color:var(--pass)">qa-playwright-e2e</a>: 18 cenários E2E com page objects, desktop e mobile · <a href="https://jardel-mateus.github.io/qa-playwright-e2e/" target="_blank" rel="noopener">relatório</a></li>
+  <li><a href="${GH}/qa-api-serverest" target="_blank" rel="noopener" style="color:var(--pass)">qa-api-serverest</a>: 34 asserções de API com Postman + Newman · <a href="https://jardel-mateus.github.io/qa-api-serverest/" target="_blank" rel="noopener">relatório</a></li></ul></div>
  <div class="box"><span class="k" style="margin-top:0">// PROCURO</span>QA · Analista de Testes · Analista de Suporte de Sistemas</div>
  <div class="btns">${MAIL('✉ Enviar e-mail','btn primary')}<a class="btn${EMAIL?'':' primary'}" href="${LI}" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn" href="${GH}" target="_blank" rel="noopener">GitHub ↗</a><a class="btn" href="cv.html" target="_blank" rel="noopener">📄 CV em PDF</a></div>`};
 
@@ -277,7 +298,7 @@ const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.5,3000);
 camera.position.set(80,60,120);
 
 const SUN_DIR=new THREE.Vector3(-.55,.38,-.74).normalize();
-scene.add(new THREE.HemisphereLight('#d2e9ff','#2a5866',1.15));
+const hemi=new THREE.HemisphereLight('#d2e9ff','#2a5866',1.15);scene.add(hemi);
 const sun=new THREE.DirectionalLight('#ffdcb0',2.7);
 sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
 Object.assign(sun.shadow.camera,{left:-110,right:110,top:110,bottom:-110,near:1,far:500});
@@ -339,6 +360,8 @@ function burst(x,y,z,n,cols,big){for(let i=0;i<n;i++){const a=Math.random()*Math
   emit(x,y,z,Math.cos(a)*s,(big?14:6)+Math.random()*(big?20:8),Math.sin(a)*s,(big?2.2:1)+Math.random()*.6,(big?2.2:1.4)+Math.random(),cols[i%cols.length],big?18:14)}}
 
 const anims=[];
+const NIGHT=[];
+const glow=(o,k,d,n)=>NIGHT.push({o,k,d,n});
 const photoTex=new THREE.TextureLoader().load('assets/jardel.svg',t=>{t.colorSpace=THREE.SRGBColorSpace});
 photoTex.repeat.set(.84,1);photoTex.offset.set(.08,0);
 
@@ -378,9 +401,13 @@ const LANDMARK={
     g.add(mesh(new THREE.ConeGeometry(2.2,2.4,10),mat('#d6453d'),{y:ty+4.1}));
     const pl=new THREE.PointLight('#ffcf6a',600,90,2);pl.position.y=ty+1.7;g.add(pl);
     const piv=new THREE.Group();piv.position.y=ty+1.7;g.add(piv);
-    const bm=new THREE.MeshBasicMaterial({color:'#fff1b8',transparent:true,opacity:.13,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide});
-    const bg=new THREE.ConeGeometry(9,90,24,1,true).translate(0,-45,0).rotateZ(Math.PI/2);
+    const bm=new THREE.MeshBasicMaterial({color:'#fff1b8',vertexColors:true,transparent:true,opacity:.2,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide,fog:false});
+    const bg=new THREE.ConeGeometry(9,90,24,8,true).translate(0,-45,0).rotateZ(Math.PI/2);
+    {const p=bg.attributes.position,c=new Float32Array(p.count*3);for(let i=0;i<p.count;i++){const f=Math.pow(clamp(1-p.getX(i)/90,0,1),1.6);c.set([f,f,f],i*3)}bg.setAttribute('color',new THREE.BufferAttribute(c,3))}
     const b1=new THREE.Mesh(bg,bm),b2=new THREE.Mesh(bg,bm);b2.rotation.y=Math.PI;b1.rotation.z=b2.rotation.z=-.06;piv.add(b1,b2);
+    glow(bm,'opacity',.2,.45);glow(lamp.material,'emissiveIntensity',2.2,5);glow(pl,'intensity',600,2500);
+    const spot=new THREE.SpotLight('#fff1b8',0,260,.12,.6,1.2);spot.position.set(0,0,0);piv.add(spot);
+    const st=new THREE.Object3D();st.position.set(120,-ty*1.4,0);piv.add(st);spot.target=st;glow(spot,'intensity',0,9000);
     anims.push((dt,t)=>{piv.rotation.y=t*.7});
   },
   sobre(g,is){
@@ -400,7 +427,9 @@ const LANDMARK={
     f.add(mesh(new THREE.BoxGeometry(14,6,10),mat('#b4553d'),{y:3}));
     f.add(mesh(new THREE.BoxGeometry(14.4,.6,10.4),mat('#8c3f2d'),{y:6.2}));
     for(let k=0;k<3;k++)f.add(mesh(new THREE.CylinderGeometry(1.9,1.9,10,3).rotateX(-Math.PI/2),mat('#7b8790'),{x:-4.6+k*4.6,y:7.4}));
-    for(let k=0;k<4;k++)f.add(mesh(new THREE.BoxGeometry(1.6,1.6,.2),new THREE.MeshStandardMaterial({color:'#ffd27a',emissive:'#ffb347',emissiveIntensity:.8}),{x:-5+k*3.3,y:2.8,z:5.05}));
+    const winM=new THREE.MeshStandardMaterial({color:'#ffd27a',emissive:'#ffb347',emissiveIntensity:.8});glow(winM,'emissiveIntensity',.8,3.5);
+    for(let k=0;k<4;k++)f.add(mesh(new THREE.BoxGeometry(1.6,1.6,.2),winM,{x:-5+k*3.3,y:2.8,z:5.05}));
+    const fl2=new THREE.PointLight('#ffb347',0,40,2);fl2.position.set(0,3,8);f.add(fl2);glow(fl2,'intensity',0,300);
     const ch=mesh(new THREE.CylinderGeometry(.9,1.15,11,10),mat('#8c3f2d'),{x:5,y:9,z:-3});f.add(ch);
     f.add(mesh(new THREE.CylinderGeometry(1,1,.8,10),mat('#f4f4f4'),{x:5,y:12,z:-3}));
     const gear=new THREE.Group();gear.position.set(-3,10,4.6);f.add(gear);
@@ -433,6 +462,7 @@ const LANDMARK={
   skills(g){
     g.add(mesh(new THREE.CylinderGeometry(3,3.8,2.4,8),mat('#8d99a3'),{y:4.2}));
     const core=mesh(new THREE.IcosahedronGeometry(1.8,0),new THREE.MeshStandardMaterial({color:'#3ddc84',emissive:'#1fa35a',emissiveIntensity:1.2,flatShading:true}),{y:9});g.add(core);
+    glow(core.material,'emissiveIntensity',1.2,4);const cl=new THREE.PointLight('#3ddc84',0,45,2);cl.position.y=9;g.add(cl);glow(cl,'intensity',0,400);
     const ring=new THREE.Group();ring.position.y=10;g.add(ring);
     const names=['Cypress','Playwright','Selenium','SQL Server','Jira','TestRail','Postman','Grafana'];
     names.forEach((n,k)=>{const tx=canvasTex(256,256,(x,w,h)=>{x.fillStyle='#0f151c';x.fillRect(0,0,w,h);x.strokeStyle='#3ddc84';x.lineWidth=14;x.strokeRect(7,7,w-14,h-14);
@@ -490,6 +520,8 @@ const boat={x:-30,z:45,a:-2.54,v:0,g:new THREE.Group()};
   const jg=new THREE.BufferGeometry();jg.setAttribute('position',new THREE.Float32BufferAttribute([0,9,.7, 0,1.6,4.2, .5,4.5,1.8, 0,9,.7, 0,1.6,.8, .5,4.5,1.8, 0,1.6,.8, 0,1.6,4.2, .5,4.5,1.8],3));jg.computeVertexNormals();
   g.add(mesh(jg,new THREE.MeshStandardMaterial({color:'#e9e4d8',side:THREE.DoubleSide,flatShading:true})));
   boat.flag=mesh(new THREE.PlaneGeometry(1.6,.9).translate(-.8,0,0),new THREE.MeshStandardMaterial({color:'#3ddc84',side:THREE.DoubleSide}),{y:10.6,z:.6});g.add(boat.flag);
+  const lan=mesh(new THREE.SphereGeometry(.3,8,6),new THREE.MeshStandardMaterial({color:'#ffe9a8',emissive:'#ffcf55',emissiveIntensity:0}),{y:3.1,z:-2,cast:false});g.add(lan);glow(lan.material,'emissiveIntensity',0,4);
+  const ll=new THREE.PointLight('#ffcf6a',0,30,2);ll.position.set(0,3.6,-1.5);g.add(ll);glow(ll,'intensity',0,45);
   const arr=new THREE.Group();const am=new THREE.MeshBasicMaterial({color:'#3ddc84',transparent:true,opacity:.9});
   arr.add(new THREE.Mesh(new THREE.ConeGeometry(1,2.6,4).rotateX(Math.PI/2).translate(0,0,1.3),am));
   arr.add(new THREE.Mesh(new THREE.BoxGeometry(.6,.3,2).translate(0,0,-.8),am));
@@ -517,6 +549,37 @@ const clouds=[];
  for(let i=0;i<16;i++){const c=new THREE.Group();const n=3+(R()*3|0);for(let k=0;k<n;k++){const s=6+R()*7;const m=new THREE.Mesh(new THREE.IcosahedronGeometry(s,0),cm);m.position.set(k*7-n*3.5,R()*3,(R()-.5)*8);m.scale.y=.65;c.add(m)}
   c.position.set((R()-.5)*900,80+R()*40,(R()-.5)*800);clouds.push(c);scene.add(c)}}
 
+const stars=(()=>{const n=900,p=new Float32Array(n*3),R=rng(5);for(let i=0;i<n;i++){const a=R()*6.283,y=.08+R()*.92,r=Math.sqrt(1-y*y);p.set([Math.cos(a)*r*1300,y*1300,Math.sin(a)*r*1300],i*3)}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(p,3));
+  const s=new THREE.Points(g,new THREE.PointsMaterial({color:'#ffffff',size:2.2,sizeAttenuation:false,transparent:true,opacity:0,fog:false,depthWrite:false}));s.frustumCulled=false;s.renderOrder=0;scene.add(s);return s})();
+const moon=new THREE.Mesh(new THREE.SphereGeometry(38,20,14),new THREE.MeshBasicMaterial({color:'#f2f4ff',fog:false,transparent:true,opacity:0}));moon.frustumCulled=false;scene.add(moon);
+const DAY={top:C('#3b82d0'),fog:C('#f4cc9c'),sun:C('#ffdcb0'),glow:C('#fff0c4'),sunI:2.7,hemiI:1.15,exp:1.05};
+const NGT={top:C('#030814'),fog:C('#0d1a33'),sun:C('#8fb0ff'),glow:C('#0d1a33'),sunI:.55,hemiI:.32,exp:1.15};
+let night=0,nightT=0;
+function setNight(on){nightT=on?1:0;$('nightBtn').textContent=on?'☀️':'🌙';$('nightBtn').title=on?'Voltar pro dia':'Ver à noite'}
+
+const dolphins=[];
+{const dm=mat('#5f7f98',{roughness:.45}),wm=mat('#e4ecf1');
+ for(let i=0;i<3;i++){const g=new THREE.Group();
+  g.add(mesh(new THREE.SphereGeometry(1,10,7).scale(.62,.58,2.3),dm));
+  g.add(mesh(new THREE.SphereGeometry(1,10,7).scale(.5,.4,1.9),wm,{y:-.2,z:.15}));
+  const fin=mesh(new THREE.ConeGeometry(.32,1.1,4).translate(0,.55,0),dm,{y:.45,z:-.3});fin.rotation.x=-.55;g.add(fin);
+  g.add(mesh(new THREE.ConeGeometry(.24,.9,6).rotateX(Math.PI/2),dm,{y:-.08,z:2.55}));
+  g.add(mesh(new THREE.BoxGeometry(1.9,.12,.55),dm,{z:-2.35}));
+  for(const s of [-1,1]){const p=mesh(new THREE.BoxGeometry(.9,.08,.4),dm,{x:s*.6,y:-.3,z:.6});p.rotation.z=s*-.5;g.add(p)}
+  g.visible=false;g.rotation.order='YXZ';g.scale.setScalar(1.35);scene.add(g);dolphins.push({g,t:9,x:0,z:0,a:0,dl:i*.4})}}
+let podT=7;
+function spawnPod(){const fx=Math.sin(boat.a),fz=Math.cos(boat.a),side=Math.random()<.5?-1:1;
+  const bx=boat.x+fx*22+fz*side*10,bz=boat.z+fz*22-fx*side*10;
+  if(ISL.some(is=>Math.hypot(bx-is.x,bz-is.z)<is.r+20))return;
+  dolphins.forEach((d,i)=>{d.x=bx+fz*side*i*2.4-fx*i*2;d.z=bz-fx*side*i*2.4-fz*i*2;d.a=boat.a+(Math.random()-.5)*.2;d.t=-d.dl})}
+function updDolphins(dt,t){for(const d of dolphins){if(d.t>3.6){d.g.visible=false;continue}d.t+=dt;
+  const k=d.t<0?-1:d.t<1.5?d.t/1.5:d.t>=1.9&&d.t<3.4?(d.t-1.9)/1.5:-1;
+  const s=d.t<0?0:Math.min(d.t,3.4)*9,px=d.x+Math.sin(d.a)*s,pz=d.z+Math.cos(d.a)*s,y=seaY(px,pz,t);
+  if(k<0){if(d.g.visible)for(let i=0;i<14;i++)emit(px,y+.3,pz,(Math.random()-.5)*5,4+Math.random()*4,(Math.random()-.5)*5,.9,1.3,WHITE,14);d.g.visible=false;continue}
+  if(!d.g.visible){d.g.visible=true;for(let i=0;i<10;i++)emit(px,y+.3,pz,(Math.random()-.5)*4,3+Math.random()*3,(Math.random()-.5)*4,.8,1.2,WHITE,14)}
+  d.g.position.set(px,y-1.2+Math.sin(k*Math.PI)*5.5,pz);d.g.rotation.y=d.a;d.g.rotation.x=-Math.cos(k*Math.PI)*.95}}
+
 const keys={};const ptr={down:false,x:0,y:0};const joy={x:0,y:0,on:false};let zoomF=innerWidth<700?1.55:1;
 const coarse=matchMedia('(pointer:coarse)').matches;
 addEventListener('keydown',e=>{
@@ -528,6 +591,7 @@ addEventListener('keydown',e=>{
   if(!started){if((k==='Enter'||k===' ')&&!$('start').disabled)startGame();return}
   if(modalOpen)return;
   if(k==='r'){openModal(RECRUITER);return}
+  if(k==='n'){setNight(!nightT);return}
   if(near&&(k==='e'||k==='Enter'||k===' '))openIsland(near);
 });
 addEventListener('keyup',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=false});
@@ -555,6 +619,7 @@ $('panel').addEventListener('click',e=>{if(e.target===$('panel')||e.target.close
 $('dock').onclick=()=>{if(near)openIsland(near)};
 $('recBtn').onclick=()=>openModal(RECRUITER);$('me').onclick=()=>openModal(RECRUITER);
 $('introRec').onclick=()=>openModal(RECRUITER);
+$('nightBtn').onclick=()=>setNight(!nightT);
 function startGame(){if(started)return;started=true;t0=clock.elapsedTime;$('intro').classList.add('hide');setTimeout(()=>toast('⛵ Zarpou! Siga a seta verde até a primeira ilha.',true),600)}
 $('start').onclick=startGame;
 function report(){const s=Math.round(clock.elapsedTime-t0),mm=String(s/60|0).padStart(2,'0'),ss=String(s%60).padStart(2,'0');
@@ -581,8 +646,9 @@ function nextTarget(){let b=null,bd=1e9;for(const is of ISL){if(is.visited)conti
 function update(dt){
   const t=clock.elapsedTime;OU.uTime.value=t;
   const turn=1.55*dt*(.3+Math.min(1,Math.abs(boat.v)/12));
+  const turbo=started&&!modalOpen&&keys.Shift&&(keys.ArrowUp||keys.w||ptr.down||joy.on);
   if(started&&!modalOpen){
-    if(keys.ArrowUp||keys.w)boat.v+=16*dt;
+    if(keys.ArrowUp||keys.w)boat.v+=(turbo?30:16)*dt;
     if(keys.ArrowDown||keys.s)boat.v-=11*dt;
     if(keys.ArrowLeft||keys.a)boat.a+=turn;
     if(keys.ArrowRight||keys.d)boat.a-=turn;
@@ -591,7 +657,8 @@ function update(dt){
       if(ray.ray.intersectPlane(plane,hit)){let d=Math.atan2(hit.x-boat.x,hit.z-boat.z)-boat.a;d=Math.atan2(Math.sin(d),Math.cos(d));boat.a+=clamp(d,-turn*1.5,turn*1.5);
         if(Math.hypot(hit.x-boat.x,hit.z-boat.z)>6)boat.v+=16*dt*(Math.abs(d)<1.3?1:.35)}}
   }
-  boat.v*=Math.pow(.45,dt);boat.v=clamp(boat.v,-7,27);
+  if(turbo&&!(keys.ArrowUp||keys.w))boat.v+=14*dt;
+  boat.v*=Math.pow(.45,dt);boat.v=clamp(boat.v,-7,turbo?42:Math.max(27,boat.v-30*dt));
   const fx=Math.sin(boat.a),fz=Math.cos(boat.a);
   boat.x+=fx*boat.v*dt;boat.z+=fz*boat.v*dt;
   for(const is of ISL){const dx=boat.x-is.x,dz=boat.z-is.z,d=Math.hypot(dx,dz),m=is.r*1.12+3;if(d<m){boat.x=is.x+dx/d*m;boat.z=is.z+dz/d*m;boat.v*=.6}}
@@ -614,14 +681,22 @@ function update(dt){
   const tg=started&&nextTarget();boat.arrow.visible=!!tg&&Math.hypot(tg.x-boat.x,tg.z-boat.z)>tg.r+40;
   if(boat.arrow.visible){boat.arrow.position.set(boat.x,h+13+Math.sin(t*3)*.4,boat.z);boat.arrow.rotation.y=Math.atan2(tg.x-boat.x,tg.z-boat.z)}
   $('goal').textContent=!started?'':tg?`🧭 próximo destino: ${tg.icon} ${tg.name}`:`✓ todas as ilhas visitadas · 🐞 ${bugCount}/8 bugs`;
-  for(const f of anims)f(dt,t);
+  if(turbo&&Math.random()<dt*40)for(const s of [-1,1])emit(boat.x+fx*3.6+fz*s*1.6,h+.5,boat.z+fz*3.6-fx*s*1.6,fz*s*6+(Math.random()-.5)*2,4+Math.random()*3,-fx*s*6+(Math.random()-.5)*2,.9,1.4,WHITE,14);
+  podT-=dt;if(podT<=0){podT=10+Math.random()*10;if(started&&Math.abs(boat.v)>5)spawnPod()}
+  updDolphins(dt,t);
+  if(Math.abs(night-nightT)>.001){night+=(nightT-night)*(1-Math.exp(-dt*1.8));if(Math.abs(night-nightT)<.002)night=nightT;
+    const u=sky.material.uniforms;u.top.value.lerpColors(DAY.top,NGT.top,night);FOG.lerpColors(DAY.fog,NGT.fog,night);scene.fog.color.copy(FOG);u.sunCol.value.lerpColors(DAY.glow,NGT.glow,night);
+    sun.color.lerpColors(DAY.sun,NGT.sun,night);sun.intensity=DAY.sunI+(NGT.sunI-DAY.sunI)*night;hemi.intensity=DAY.hemiI+(NGT.hemiI-DAY.hemiI)*night;
+    renderer.toneMappingExposure=DAY.exp+(NGT.exp-DAY.exp)*night;stars.material.opacity=night;moon.material.opacity=night;
+    for(const g of NIGHT)g.o[g.k]=g.d+(g.n-g.d)*night}
   for(const b of birds){const a=t*b.sp+b.ph;b.b.position.set(b.cx+Math.cos(a)*b.rad,b.h+Math.sin(t*.7+b.ph)*2,b.cz+Math.sin(a)*b.rad);b.b.rotation.y=-a;const f=Math.sin(t*7+b.ph)*.5;b.l.rotation.z=f;b.r.rotation.z=-f}
   for(const c of clouds){c.position.x+=3*dt;if(c.position.x>500)c.position.x=-500}
   updParts(dt);
   if(!started){const a=t*.06;tmp.set(Math.sin(a)*120,58,Math.cos(a)*120+20);camera.position.lerp(tmp,1-Math.exp(-dt*1.5));camLook.lerp(tmp.set(0,6,10),1-Math.exp(-dt*2))}
   else{const dist=27*zoomF,ht=12.5*zoomF;tmp.set(boat.x-fx*dist,h+ht,boat.z-fz*dist);camera.position.lerp(tmp,1-Math.exp(-dt*3));camLook.lerp(tmp.set(boat.x+fx*8,h+2.5,boat.z+fz*8),1-Math.exp(-dt*5))}
   camera.lookAt(camLook);
-  sky.position.copy(camera.position);
+  sky.position.copy(camera.position);stars.position.copy(camera.position);
+  moon.position.set(camera.position.x+SUN_DIR.x*1200,camera.position.y+SUN_DIR.y*1200+80,camera.position.z+SUN_DIR.z*1200);
   ocean.position.set(Math.round(camera.position.x/5)*5,0,Math.round(camera.position.z/5)*5);
   sun.position.set(boat.x+SUN_DIR.x*220,SUN_DIR.y*220,boat.z+SUN_DIR.z*220);sun.target.position.set(boat.x,0,boat.z);
   for(const is of ISL){tmp.set(is.x,is.ly,is.z);const d=camera.position.distanceTo(tmp);tmp.project(camera);
