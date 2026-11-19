@@ -55,7 +55,7 @@ kbd{font-family:var(--mono);background:#1b2633;border:1px solid #2b3a4a;border-b
 #joy{position:fixed;left:24px;bottom:24px;width:120px;height:120px;border-radius:50%;z-index:6;display:none;background:rgba(10,14,19,.35);border:2px solid rgba(255,255,255,.25);touch-action:none}
 #knob{position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:rgba(61,220,132,.85);box-shadow:0 4px 20px rgba(0,0,0,.4)}
 
-.modal{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:rgba(3,10,16,.5);opacity:0;pointer-events:none;transition:.25s;padding:16px}
+.modal{position:fixed;inset:0;z-index:40;display:grid;place-items:center;background:rgba(3,10,16,.5);opacity:0;pointer-events:none;transition:.25s;padding:16px}
 .modal.open{opacity:1;pointer-events:auto}
 .card{width:min(700px,100%);max-height:86vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.55);
   transform:translateY(24px) scale(.97);transition:.3s cubic-bezier(.2,.8,.2,1);-webkit-user-select:text;user-select:text}
@@ -186,7 +186,8 @@ import * as THREE from 'three';
 
 const LI='https://www.linkedin.com/in/jardel-mateus-67a88a125/';
 const EMAIL='jardelmateus53@gmail.com';
-const MAIL=(label,cls='btn')=>EMAIL?`<a class="${cls}" href="mailto:${EMAIL}">${label}</a><button class="btn" data-copy>📋 Copiar e-mail</button>`:'';
+const WA='https://wa.me/5554999430950';
+const MAIL=(label,cls='btn')=>(EMAIL?`<a class="${cls}" href="mailto:${EMAIL}">${label}</a><button class="btn" data-copy>📋 Copiar e-mail</button>`:'')+`<a class="btn" href="${WA}" target="_blank" rel="noopener">💬 WhatsApp</a>`;
 const GH='https://github.com/jardel-mateus';
 const $=id=>document.getElementById(id);
 
