@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Currículo · Jardel Mateus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14202b;--muted:#5b6b78;--acc:#1c9c58;--line:#dfe6ec}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#e9eef2;line-height:1.5;font-size:13.5px}
+.bar{position:sticky;top:0;display:flex;gap:10px;justify-content:center;padding:12px;background:#0f151c;z-index:2;flex-wrap:wrap}
+.bar a,.bar button{font:600 14px Inter,sans-serif;padding:10px 16px;border-radius:10px;border:1px solid #2b3a4a;background:#1b2633;color:#fff;text-decoration:none;cursor:pointer}
+.bar button{background:#3ddc84;color:#06110a;border-color:#3ddc84}
+.page{width:210mm;min-height:297mm;margin:20px auto;background:#fff;padding:16mm 16mm 14mm;box-shadow:0 10px 40px rgba(0,0,0,.12)}
+header{display:flex;gap:20px;align-items:center;padding-bottom:16px;border-bottom:3px solid var(--acc)}
+.ph{width:96px;height:96px;border-radius:50%;background:url(assets/jardel.svg) center/cover no-repeat;flex:none}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.role{color:var(--acc);font-weight:600;font-size:15px;margin:3px 0 6px}
+.contact{color:var(--muted);font-size:12.5px;display:flex;flex-wrap:wrap;gap:4px 14px}
+.contact a{color:inherit}
+.grid{display:grid;grid-template-columns:1fr 62mm;gap:22px;margin-top:18px}
+h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin:0 0 8px;font-weight:800}
+section{margin-bottom:16px}
+.job{margin-bottom:12px}
+.job .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.job b{font-size:14px}
+.job .d{color:var(--muted);font-size:12px;white-space:nowrap}
+.job .c{color:var(--muted);font-size:12.5px;margin-bottom:3px}
+ul{padding-left:16px}
+li{margin:2px 0}
+.side section{background:#f5f8fa;border:1px solid var(--line);border-radius:10px;padding:12px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tags span{font-size:11.5px;padding:3px 8px;border-radius:6px;background:#fff;border:1px solid var(--line)}
+.sub{font-size:11px;font-weight:700;color:var(--muted);margin:8px 0 4px}
+p{margin-bottom:6px}
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff}
+  .bar{display:none}
+  .page{margin:0;box-shadow:none;width:auto;min-height:auto}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:820px){.page{width:auto;margin:10px;padding:20px}.grid{grid-template-columns:1fr}header{flex-direction:column;text-align:center}.contact{justify-content:center}}
+</style>
+</head>
+<body>
+<div class="bar"><button onclick="print()">🖨️ Salvar como PDF / Imprimir</button><a href="index.html">⛵ Voltar ao portfólio</a></div>
+<main class="page">
+  <header>
+    <div class="ph"></div>
+    <div>
+      <h1>Jardel Mateus</h1>
+      <div class="role">Analista de Testes (QA) · Suporte de Sistemas</div>
+      <div class="contact">
+        <span>📍 Não-Me-Toque, RS · presencial, híbrido ou remoto</span>
+        <span>in <a href="https://www.linkedin.com/in/jardel-mateus-67a88a125/">linkedin.com/in/jardel-mateus-67a88a125</a></span>
+        <span>⌂ <a href="https://github.com/jardel-mateus">github.com/jardel-mateus</a></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div>
+      <section>
+        <h2>Resumo</h2>
+        <p>Profissional de tecnologia com 4+ anos em TI, atuando como Analista de QA em sistemas de manufatura (MES/LES, OEE, rastreabilidade) e antes no suporte de sistemas N3. Uso consistente de SQL Server para consulta, análise de dados e validação de regras de negócio. Mais de 10 anos de vivência no chão de fábrica, o que me dá visão real de como o usuário da indústria usa o sistema. Formado em Análise e Desenvolvimento de Sistemas e pós-graduando em Engenharia de Software.</p>
+      </section>
+      <section>
+        <h2>Experiência</h2>
+        <div class="job"><div class="t"><b>Analista de Testes</b><span class="d">jan/2024 – jul/2026</span></div><div class="c">Stara S/A · Não-Me-Toque/RS</div>
+          <ul><li>QA em sistemas de manufatura: MES/LES, OEE, rastreabilidade e apontamento de produção.</li>
+          <li>Criação e execução de cenários de teste, validação de regras de negócio, documentação de bugs e acompanhamento de correções.</li>
+          <li>Jira e TestRail para gestão de casos e rastreabilidade entre requisito, teste e resultado.</li>
+          <li>SQL Server para validação de dados e regras de negócio.</li>
+          <li>Preparação de ambientes de teste, reprodução de erros com evidências e retestes antes de cada release.</li>
+          <li>Trabalho direto com o desenvolvedor em equipe enxuta (Scrum/Kanban) e treinamento de usuários nas entregas.</li></ul></div>
+        <div class="job"><div class="t"><b>Suporte de Sistemas</b><span class="d">set/2022 – dez/2023</span></div><div class="c">Stara S/A · Não-Me-Toque/RS</div>
+          <ul><li>Suporte avançado (N3): investigação com usuários, leitura de logs e reprodução de erros.</li>
+          <li>Troubleshooting no banco com SQL: falhas lógicas, correção de dados inconsistentes e validação.</li>
+          <li>Chamados no GLPI e acompanhamento de indicadores no Grafana.</li>
+          <li>Layouts de impressão térmica em ZPL e controle de versões dos sistemas.</li>
+          <li>Integração do chão de fábrica com CLPs e OPC UA, com coleta de dados em tempo real para OEE.</li></ul></div>
+        <div class="job"><div class="t"><b>Programador CNC</b><span class="d">ago/2014 – ago/2022</span></div><div class="c">Implementos Agrícolas Jan · Não-Me-Toque/RS</div>
+          <ul><li>Operação e programação CNC em produção industrial e acompanhamento de padrões de qualidade.</li></ul></div>
+        <div class="job"><div class="t"><b>Jovem Aprendiz · Mecânico de Usinagem</b><span class="d">abr/2012 – abr/2014</span></div><div class="c">JAN · Não-Me-Toque/RS</div></div>
+      </section>
+      <section>
+        <h2>Projetos</h2>
+        <div class="job"><b>Nexo Ops</b><div class="c">Central de atendimento e campanhas no WhatsApp (com João Matheus Borba)</div>
+          <p>Reúne WhatsApp comum e Business numa tela, com indicadores de atendimento/vendas e disparos agendados para contatos autorizados.</p></div>
+      </section>
+    </div>
+    <aside class="side">
+      <section>
+        <h2>Formação</h2>
+        <p><b>Pós em Engenharia de Software</b><br><span style="color:var(--muted)">em andamento</span></p>
+        <p><b>Análise e Desenvolvimento de Sistemas</b><br><span style="color:var(--muted)">ULBRA · 2021 – 2023</span></p>
+        <p style="margin:0"><b>Inglês</b><br><span style="color:var(--muted)">Rockfeller · 2024 – 2027</span></p>
+      </section>
+      <section style="margin-top:12px">
+        <h2>Competências</h2>
+        <div class="sub">QUALIDADE</div><div class="tags"><span>Testes funcionais</span><span>Testes manuais</span><span>Regressão</span><span>Cenários de teste</span><span>Gestão de bugs</span></div>
+        <div class="sub">AUTOMAÇÃO & APIs</div><div class="tags"><span>Cypress</span><span>Playwright</span><span>Selenium</span><span>Postman</span><span>Insomnia</span></div>
+        <div class="sub">DADOS & SISTEMAS</div><div class="tags"><span>SQL Server</span><span>Grafana</span><span>GLPI</span><span>ZPL</span><span>OPC UA</span></div>
+        <div class="sub">GESTÃO</div><div class="tags"><span>Jira</span><span>TestRail</span><span>Scrum</span><span>Kanban</span></div>
+        <div class="sub">MANUFATURA</div><div class="tags"><span>MES</span><span>LES</span><span>OEE</span><span>Rastreabilidade</span></div>
+      </section>
+    </aside>
+  </div>
+</main>
+<script>if(location.search.includes('print'))addEventListener('load',()=>setTimeout(print,600))</script>
+</body>
+</html>

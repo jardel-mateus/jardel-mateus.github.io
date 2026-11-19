@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jardel Mateus · QA & Sistemas</title>
+<meta name="description" content="Jardel Mateus — Analista de Testes (QA), automação com Cypress, Playwright e Selenium, SQL Server e sistemas de manufatura (MES, LES, OEE).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e13; --bg2:#0f151c; --card:#121a23; --line:#1f2b38;
+  --text:#e6edf3; --muted:#8b9bab; --pass:#3ddc84; --fail:#ff5f6d; --warn:#ffb547; --info:#5ab0ff;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace; --sans:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:48px 48px;opacity:.25;mask-image:radial-gradient(ellipse at top,#000 30%,transparent 75%)}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+.mono{font-family:var(--mono)}
+
+nav{position:sticky;top:0;z-index:20;background:rgba(10,14,19,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.logo{font-family:var(--mono);font-weight:800;text-decoration:none}
+.logo span{color:var(--pass)}
+.links{display:flex;gap:22px;font-family:var(--mono);font-size:13px}
+.links a{text-decoration:none;color:var(--muted)}
+.links a:hover{color:var(--pass)}
+.bugcount{font-family:var(--mono);font-size:12px;border:1px solid var(--line);padding:4px 10px;border-radius:999px;color:var(--muted);white-space:nowrap}
+.bugcount b{color:var(--fail)}
+
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:80px 0 60px;min-height:calc(100vh - 60px)}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--pass);border:1px solid rgba(61,220,132,.35);background:rgba(61,220,132,.08);padding:6px 12px;border-radius:999px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--pass);box-shadow:0 0 10px var(--pass);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.3}}
+h1{font-size:clamp(44px,7vw,80px);line-height:1;font-weight:800;letter-spacing:-.03em;margin:22px 0 14px}
+h1 .accent{color:var(--pass)}
+.role{font-family:var(--mono);color:var(--warn);font-size:15px;margin-bottom:18px}
+.lead{color:var(--muted);font-size:17px;max-width:520px}
+.lead strong{color:var(--text);font-weight:600}
+.cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:14px;font-weight:600;padding:12px 20px;border-radius:10px;text-decoration:none;border:1px solid var(--line);transition:.2s}
+.btn.primary{background:var(--pass);color:#06110a;border-color:var(--pass)}
+.btn.primary:hover{box-shadow:0 0 0 4px rgba(61,220,132,.2)}
+.btn:not(.primary):hover{border-color:var(--pass);color:var(--pass)}
+
+.term{background:#070a0e;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(61,220,132,.05)}
+.term-bar{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--bg2);border-bottom:1px solid var(--line)}
+.term-bar i{width:11px;height:11px;border-radius:50%;background:#2a3542}
+.term-bar i:nth-child(1){background:#ff5f56}.term-bar i:nth-child(2){background:#ffbd2e}.term-bar i:nth-child(3){background:#27c93f}
+.term-bar span{margin-left:10px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.term-body{font-family:var(--mono);font-size:13px;padding:18px;min-height:360px;white-space:pre-wrap;line-height:1.75}
+.term-body .p{color:var(--pass)}.term-body .m{color:var(--muted)}.term-body .w{color:var(--warn)}.term-body .f{color:var(--fail)}.term-body .i{color:var(--info)}
+.cursor{display:inline-block;width:8px;height:15px;background:var(--pass);vertical-align:-2px;animation:pulse 1s steps(1) infinite}
+.replay{background:none;border:0;color:var(--muted);font-family:var(--mono);font-size:12px;margin-left:auto;cursor:pointer}
+.replay:hover{color:var(--pass)}
+
+section{padding:90px 0;border-top:1px solid var(--line)}
+.kicker{font-family:var(--mono);color:var(--pass);font-size:13px;margin-bottom:10px}
+h2{font-size:clamp(30px,4vw,44px);letter-spacing:-.02em;line-height:1.1;margin-bottom:36px}
+.grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:40px}
+.about p{color:var(--muted);margin-bottom:16px;font-size:16.5px}
+.about p strong{color:var(--text)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.stat b{display:block;font-family:var(--mono);font-size:34px;color:var(--pass);line-height:1.1}
+.stat span{color:var(--muted);font-size:13px}
+
+.suite{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;overflow:hidden}
+.suite summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:20px 22px}
+.suite summary::-webkit-details-marker{display:none}
+.badge{font-family:var(--mono);font-size:11px;font-weight:800;padding:4px 8px;border-radius:6px;background:rgba(61,220,132,.12);color:var(--pass);border:1px solid rgba(61,220,132,.3)}
+.badge.wip{background:rgba(255,181,71,.1);color:var(--warn);border-color:rgba(255,181,71,.3)}
+.suite h3{font-size:18px}
+.suite .where{color:var(--muted);font-size:14px}
+.suite .when{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right}
+.suite .chev{transition:.2s;display:inline-block;margin-left:8px}
+.suite[open] .chev{transform:rotate(90deg)}
+.suite ul{list-style:none;padding:0 22px 22px 22px;font-size:14.5px;color:var(--muted)}
+.suite li{padding:7px 0 7px 26px;position:relative;border-top:1px dashed var(--line)}
+.suite li::before{content:"✓";position:absolute;left:2px;color:var(--pass);font-family:var(--mono);font-weight:800}
+
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;transition:.25s;position:relative}
+.proj:hover{transform:translateY(-4px);border-color:rgba(61,220,132,.45)}
+.proj.featured{grid-column:1/-1;background:linear-gradient(135deg,rgba(61,220,132,.08),transparent 60%),var(--card)}
+.proj h3{font-size:22px}
+.proj p{color:var(--muted);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tags span{font-family:var(--mono);font-size:11.5px;padding:4px 9px;border-radius:6px;background:var(--bg2);border:1px solid var(--line);color:var(--muted)}
+.proj.todo{border-style:dashed;opacity:.8}
+.proj.todo .badge{background:rgba(90,176,255,.1);color:var(--info);border-color:rgba(90,176,255,.3)}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.skillcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.skillcard h4{font-family:var(--mono);font-size:13px;color:var(--warn);margin-bottom:14px}
+.skillcard .chips{display:flex;flex-wrap:wrap;gap:8px}
+.skillcard .chips span{font-size:13.5px;padding:6px 11px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);transition:.2s}
+.skillcard .chips span:hover{border-color:var(--pass);color:var(--pass)}
+
+.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.edu div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.edu b{display:block;font-size:17px;margin:8px 0 4px}
+.edu span{color:var(--muted);font-size:14px}
+
+.contact{text-align:center}
+.contact h2{margin-bottom:16px}
+.contact p{color:var(--muted);max-width:560px;margin:0 auto 30px}
+.contact .cta{justify-content:center}
+footer{padding:30px 0 40px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+
+#bug{position:fixed;z-index:30;width:30px;height:30px;cursor:crosshair;transition:left 2.4s ease-in-out,top 2.4s ease-in-out;font-size:24px;line-height:30px;text-align:center;filter:drop-shadow(0 0 6px rgba(255,95,109,.6));user-select:none}
+#bug.caught{transition:transform .4s,opacity .4s;transform:scale(2.5) rotate(180deg);opacity:0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--card);border:1px solid var(--line);border-left:4px solid var(--fail);border-radius:10px;padding:14px 18px;font-family:var(--mono);font-size:13px;z-index:40;transition:.35s;max-width:calc(100% - 32px)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;padding-top:50px;min-height:auto}
+  .grid2{grid-template-columns:1fr}
+  .links{display:none}
+  .suite summary{grid-template-columns:auto 1fr}
+  .suite .when{grid-column:2;text-align:left}
+  .term-body{font-size:12px;min-height:320px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#top" class="logo">jardel<span>.spec</span>()</a>
+    <div class="links">
+      <a href="#sobre">sobre</a><a href="#experiencia">experiência</a><a href="#projetos">projetos</a><a href="#skills">skills</a><a href="#contato">contato</a><a href="index.html" style="color:var(--pass)">⛵ modo jogo</a>
+    </div>
+    <div class="bugcount" title="Tem um bug andando pela página. Clique nele!">🐞 bugs reportados: <b id="bugN">0</b></div>
+  </div>
+</nav>
+
+<main id="top">
+  <div class="wrap">
+    <header class="hero">
+      <div>
+        <span class="status"><i></i>Disponível · presencial, híbrido ou remoto</span>
+        <h1>Jardel<br><span class="accent">Mateus</span></h1>
+        <div class="role">&gt; Analista de Testes · QA · Suporte de Sistemas</div>
+        <p class="lead">Encontro o bug <strong>antes</strong> que ele chegue ao usuário. Mais de 4 anos testando e sustentando <strong>sistemas de manufatura</strong> (MES, LES, OEE), com <strong>SQL Server</strong> no dia a dia e automação com <strong>Cypress, Playwright e Selenium</strong>.</p>
+        <div class="cta">
+          <a class="btn primary" href="#contato">Vamos conversar →</a>
+          <a class="btn" href="#projetos">Ver projetos</a>
+          <a class="btn" href="https://www.linkedin.com/in/jardel-mateus-67a88a125/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="term" aria-label="Terminal executando testes sobre o Jardel">
+        <div class="term-bar"><i></i><i></i><i></i><span>~/jardel — test runner</span><button class="replay" id="replay">↻ rodar de novo</button></div>
+        <div class="term-body" id="term"></div>
+      </div>
+    </header>
+  </div>
+
+  <section id="sobre">
+    <div class="wrap grid2">
+      <div class="about reveal">
+        <div class="kicker">describe('quem sou eu')</div>
+        <h2>Do chão de fábrica para a qualidade de software.</h2>
+        <p>Comecei como <strong>jovem aprendiz em usinagem</strong> e passei 8 anos como <strong>programador CNC</strong>. Esse tempo na produção me deu algo raro em QA: eu sei como o sistema é usado de verdade, na linha, por quem precisa que ele funcione.</p>
+        <p>Depois migrei para a TI: primeiro no <strong>suporte de sistemas N3</strong> (GLPI, Grafana, SQL, integração com CLPs e OPC UA) e depois como <strong>Analista de Testes</strong> em sistemas MES/LES, rastreabilidade e apontamento de produção.</p>
+        <p>Formado em <strong>Análise e Desenvolvimento de Sistemas</strong> (ULBRA) e pós-graduando em <strong>Engenharia de Software</strong>.</p>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><b data-count="14">0</b><span>anos na indústria</span></div>
+        <div class="stat"><b data-count="4">0</b><span>anos em TI (suporte + QA)</span></div>
+        <div class="stat"><b>N3</b><span>suporte avançado e troubleshooting em banco</span></div>
+        <div class="stat"><b>SQL</b><span>validação de dados e regras de negócio</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiencia">
+    <div class="wrap">
+      <div class="kicker reveal">npm run test:carreira</div>
+      <h2 class="reveal">Experiência</h2>
+
+      <details class="suite reveal" open>
+        <summary><span class="badge">PASS</span><div><h3>Analista de Testes</h3><div class="where">Stara S/A · Não-Me-Toque/RS</div></div><div class="when">jan/2024 – jul/2026<span class="chev">›</span></div></summary>
+        <ul>
+          <li>QA em sistemas de manufatura: MES/LES, OEE, rastreabilidade e apontamento de produção</li>
+          <li>Criação e execução de cenários de teste, validação de regras de negócio e documentação de bugs</li>
+          <li>Jira e TestRail para rastreabilidade entre requisito, teste e resultado</li>
+          <li>SQL Server para validar dados e regras de negócio direto no banco</li>
+          <li>Preparação de ambientes de teste, reprodução de erros e retestes antes de cada release</li>
+          <li>Trabalho direto com o dev em equipe enxuta (Scrum/Kanban) e treinamento dos usuários nas entregas</li>
+        </ul>
+      </details>
+
+      <details class="suite reveal">
+        <summary><span class="badge">PASS</span><div><h3>Suporte de Sistemas</h3><div class="where">Stara S/A · Não-Me-Toque/RS</div></div><div class="when">set/2022 – dez/2023<span class="chev">›</span></div></summary>
+        <ul>
+          <li>Suporte avançado (N3): investigação com usuários, leitura de logs e reprodução de erros</li>
+          <li>Troubleshooting no banco com SQL: falhas lógicas, correção de dados inconsistentes</li>
+          <li>Chamados no GLPI e monitoramento de indicadores no Grafana</li>
+          <li>Layouts de impressão térmica em ZPL</li>
+          <li>Integração do chão de fábrica com CLPs e OPC UA, coletando dados em tempo real para o OEE</li>
+        </ul>
+      </details>
+
+      <details class="suite reveal">
+        <summary><span class="badge">PASS</span><div><h3>Programador CNC</h3><div class="where">Implementos Agrícolas Jan · Não-Me-Toque/RS</div></div><div class="when">ago/2014 – ago/2022<span class="chev">›</span></div></summary>
+        <ul>
+          <li>Operação e programação CNC em produção industrial</li>
+          <li>Acompanhamento de padrões de qualidade no ambiente fabril</li>
+          <li>Base sólida em processos de chão de fábrica, que hoje uso para testar sistemas MES/LES</li>
+        </ul>
+      </details>
+
+      <details class="suite reveal">
+        <summary><span class="badge">PASS</span><div><h3>Jovem Aprendiz · Mecânico de Usinagem</h3><div class="where">JAN · Não-Me-Toque/RS</div></div><div class="when">abr/2012 – abr/2014<span class="chev">›</span></div></summary>
+        <ul><li>Onde tudo começou: usinagem, precisão e atenção aos detalhes</li></ul>
+      </details>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="wrap">
+      <div class="kicker reveal">ls ./projetos</div>
+      <h2 class="reveal">Projetos</h2>
+      <div class="projects">
+        <article class="proj featured reveal">
+          <span class="badge" style="align-self:flex-start">NO AR</span>
+          <h3>Nexo Ops</h3>
+          <p>Central que reúne WhatsApp comum e WhatsApp Business numa só tela. A equipe alterna entre números, organiza contas por setor, acompanha indicadores de atendimento e vendas e agenda campanhas com envio automático para contatos autorizados, respeitando intervalos e mostrando o status de cada mensagem. Desenvolvido em dupla com João Matheus Borba.</p>
+          <div class="tags"><span>Automação</span><span>Integração de APIs</span><span>WhatsApp API</span><span>Dashboards</span></div>
+        </article>
+        <article class="proj todo reveal">
+          <span class="badge" style="align-self:flex-start">EM BREVE</span>
+          <h3>Automação E2E</h3>
+          <p>Espaço para um repositório com testes end-to-end em Playwright/Cypress (ex.: um e-commerce de demonstração), com page objects e relatório no CI.</p>
+          <div class="tags"><span>Playwright</span><span>Cypress</span><span>GitHub Actions</span></div>
+        </article>
+        <article class="proj todo reveal">
+          <span class="badge" style="align-self:flex-start">EM BREVE</span>
+          <h3>Testes de API</h3>
+          <p>Espaço para uma coleção de testes de API com Postman/Insomnia e asserções automatizadas, documentando casos e evidências.</p>
+          <div class="tags"><span>Postman</span><span>Insomnia</span><span>REST</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="kicker reveal">expect(skills).toContain(...)</div>
+      <h2 class="reveal">Habilidades</h2>
+      <div class="skills">
+        <div class="skillcard reveal"><h4>// QUALIDADE</h4><div class="chips"><span>Testes funcionais</span><span>Testes manuais</span><span>Cenários de teste</span><span>Regressão</span><span>Gestão de bugs</span><span>Evidências</span></div></div>
+        <div class="skillcard reveal"><h4>// AUTOMAÇÃO</h4><div class="chips"><span>Cypress</span><span>Playwright</span><span>Selenium</span><span>Postman</span><span>Insomnia</span><span>APIs REST</span></div></div>
+        <div class="skillcard reveal"><h4>// DADOS & SISTEMAS</h4><div class="chips"><span>SQL Server</span><span>SQL</span><span>Grafana</span><span>GLPI</span><span>ZPL</span><span>OPC UA / CLPs</span></div></div>
+        <div class="skillcard reveal"><h4>// GESTÃO & MANUFATURA</h4><div class="chips"><span>Jira</span><span>TestRail</span><span>Scrum</span><span>Kanban</span><span>MES</span><span>LES</span><span>OEE</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="formacao">
+    <div class="wrap">
+      <div class="kicker reveal">cat formacao.json</div>
+      <h2 class="reveal">Formação</h2>
+      <div class="edu">
+        <div class="reveal"><span class="badge wip">EM ANDAMENTO</span><b>Pós em Engenharia de Software</b><span>Pós-graduação</span></div>
+        <div class="reveal"><span class="badge">CONCLUÍDO</span><b>Análise e Desenvolvimento de Sistemas</b><span>ULBRA · 2021 – 2023</span></div>
+        <div class="reveal"><span class="badge wip">EM ANDAMENTO</span><b>Inglês</b><span>Rockfeller Language Center · 2024 – 2027</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="contact">
+    <div class="wrap reveal">
+      <div class="kicker">git push origin oportunidade</div>
+      <h2>Bora testar uma parceria?</h2>
+      <p>Estou aberto a vagas de QA, Analista de Testes e Suporte de Sistemas: presencial em Não-Me-Toque/RS e região, híbrido ou remoto.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://www.linkedin.com/in/jardel-mateus-67a88a125/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="https://github.com/jardel-mateus" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>✓ 1 portfólio · 0 bugs conhecidos (ou será que não?) · © <span id="yr"></span> Jardel Mateus</footer>
+
+<div id="bug" role="button" aria-label="Um bug! Clique para reportar" tabindex="0">🐞</div>
+<div class="toast" id="toast"></div>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const term = document.getElementById('term');
+const script = [
+  ['$ ', 'p', 'npx playwright test jardel.spec.ts', 'type'],
+  ['\n', 'm', 'Running 8 tests using 1 worker\n\n'],
+  ['  ✓ ', 'p', 'tem 4+ anos em TI (suporte N3 + QA)'],
+  ['  ✓ ', 'p', 'valida regras de negócio direto no SQL Server'],
+  ['  ✓ ', 'p', 'entende MES, LES e OEE no chão de fábrica'],
+  ['  ✓ ', 'p', 'gerencia casos no Jira e TestRail'],
+  ['  ✓ ', 'p', 'automatiza com Cypress, Playwright, Selenium'],
+  ['  ✓ ', 'p', 'testa APIs com Postman e Insomnia'],
+  ['  ✓ ', 'p', 'treina usuários após cada entrega'],
+  ['  ⚠ ', 'w', 'está procurando a próxima oportunidade'],
+  ['\n', 'm', '  ────────────────────────────────\n'],
+  ['  ', 'p', '7 passed', 'end'],
+];
+let timers = [];
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function run(){
+  timers.forEach(clearTimeout); timers=[]; term.innerHTML='';
+  let html=''; let t=300;
+  const render = extra => term.innerHTML = html + (extra||'') + '<span class="cursor"></span>';
+  script.forEach(([pre,cls,text,mode])=>{
+    if(mode==='type'){
+      timers.push(setTimeout(()=>{html+=`<span class="p">${pre}</span>`;render()},t));
+      [...text].forEach((ch,i)=>{t+=45;timers.push(setTimeout(()=>{render(`<span>${esc(text.slice(0,i+1))}</span>`)},t))});
+      t+=400; timers.push(setTimeout(()=>{html+=esc(text);render()},t));
+    } else if(pre.startsWith('\n')){
+      t+=500; timers.push(setTimeout(()=>{html+=`<span class="m">\n${esc(text)}</span>`;render()},t));
+    } else {
+      t+= mode==='end'?500:330;
+      const line = mode==='end'
+        ? `<span class="p">${pre}${esc(text)}</span><span class="m">, 1 aguardando você (3.1s)\n\n</span><span class="p">$ </span>`
+        : `<span class="${cls}">${pre}</span>${esc(text)} <span class="m">(${(Math.random()*90+20)|0}ms)</span>\n`;
+      timers.push(setTimeout(()=>{html+=line;render()},t));
+    }
+  });
+}
+run();
+document.getElementById('replay').onclick = run;
+
+const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);
+  e.target.querySelectorAll('[data-count]').forEach(el=>{const n=+el.dataset.count;let c=0;const s=setInterval(()=>{c++;el.textContent=c+'+';if(c>=n)clearInterval(s)},70)})}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const bug=document.getElementById('bug'), toast=document.getElementById('toast'), bugN=document.getElementById('bugN');
+let count=0, moveT;
+const msgs=['BUG-001 reportado: “botão some ao clicar”. Evidência anexada ✓','BUG-002: “inseto reaparece após correção”. Reaberto 🔁','BUG-003: “bug foge do testador”. Severidade: crítica 😅','Você daria um ótimo QA. Contrata o Jardel e ele acha o resto 😉'];
+function moveBug(){
+  const x=Math.random()*(innerWidth-60)+15, y=Math.random()*(innerHeight-120)+80;
+  bug.style.transform=`rotate(${Math.random()*360|0}deg)`;
+  bug.style.left=x+'px'; bug.style.top=y+'px';
+}
+function catchBug(){
+  count++; bugN.textContent=count;
+  toast.textContent='🐞 '+msgs[Math.min(count-1,msgs.length-1)];
+  toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),3200);
+  bug.classList.add('caught');
+  setTimeout(()=>{bug.classList.remove('caught');bug.style.transition='none';moveBug();requestAnimationFrame(()=>bug.style.transition='')},1500);
+}
+bug.addEventListener('click',catchBug);
+bug.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')catchBug()});
+bug.style.left=(innerWidth-80)+'px'; bug.style.top=(innerHeight-100)+'px';
+moveT=setInterval(moveBug,2600);
+</script>
+</body>
+</html>
