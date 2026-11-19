@@ -185,7 +185,7 @@ setTimeout(()=>{ if(!window.__ready){ const l=document.getElementById('load'); i
 import * as THREE from 'three';
 
 const LI='https://www.linkedin.com/in/jardel-mateus-67a88a125/';
-const EMAIL='';
+const EMAIL='jardelmateus53@gmail.com';
 const MAIL=(label,cls='btn')=>EMAIL?`<a class="${cls}" href="mailto:${EMAIL}">${label}</a><button class="btn" data-copy>📋 Copiar e-mail</button>`:'';
 const GH='https://github.com/jardel-mateus';
 const $=id=>document.getElementById(id);
@@ -201,11 +201,11 @@ const ISL=[
   html:`<div class="who"><div class="photo"></div><div><h3>Jardel Mateus</h3><div class="r">Analista de Testes · QA · Suporte de Sistemas</div><div class="l">Não-Me-Toque, RS · presencial, híbrido ou remoto</div><span class="otw">#OPENTOWORK</span></div></div>
   <p>Comecei como <strong>jovem aprendiz em usinagem</strong> e passei 8 anos como <strong>programador CNC</strong>. Esse tempo na produção me deu algo raro em QA: eu sei como o sistema é usado de verdade, na linha, por quem precisa que ele funcione.</p>
   <p>Depois migrei pra TI: primeiro no <strong>suporte de sistemas N3</strong> (GLPI, Grafana, SQL, CLPs e OPC UA) e depois como <strong>Analista de Testes</strong> em sistemas MES/LES, rastreabilidade e apontamento de produção.</p>
-  <p>Formado em <strong>Análise e Desenvolvimento de Sistemas</strong> (ULBRA) e pós-graduando em <strong>Engenharia de Software</strong>.</p>
+  <p>Formado em <strong>Análise e Desenvolvimento de Sistemas</strong> (ULBRA) e cursando pós em <strong>Engenharia de Software com ênfase em Qualidade e Teste</strong> (Anhanguera).</p>
   <div class="stats"><div class="stat"><b>14+</b><span>anos na indústria</span></div><div class="stat"><b>4+</b><span>anos em TI</span></div><div class="stat"><b>N3</b><span>suporte avançado</span></div><div class="stat"><b>SQL</b><span>validação no banco</span></div></div>`},
  {id:'exp',name:'Arquipélago da Carreira',kick:'npm run test:carreira',icon:'🏭',x:150,z:-110,r:30,color:'#5a923f',ly:26,
   html:`<div class="job"><span class="badge">PASS</span><div class="top"><h3>Analista de Testes</h3><span class="when">jan/2024 – jul/2026</span></div><div class="where">Stara S/A · Não-Me-Toque/RS</div><ul class="ck">
-   <li>QA em sistemas de manufatura: MES/LES, OEE, rastreabilidade e apontamento de produção</li><li>Criação e execução de cenários de teste, validação de regras de negócio e documentação de bugs</li><li>Jira e TestRail pra rastreabilidade entre requisito, teste e resultado</li><li>SQL Server pra validar dados e regras de negócio direto no banco</li><li>Preparação de ambientes, reprodução de erros e retestes antes de cada release</li><li>Trabalho direto com o dev (Scrum/Kanban) e treinamento dos usuários nas entregas</li></ul></div>
+   <li>QA em sistemas de manufatura: MES/LES, OEE, rastreabilidade e apontamento de produção</li><li>Criação e execução de cenários de teste, validação de regras de negócio e documentação de bugs</li><li>Jira e TestRail pra rastreabilidade entre requisito, teste e resultado</li><li>SQL Server pra validar dados e regras de negócio direto no banco</li><li>Preparação de ambientes, reprodução de erros e retestes antes de cada release</li><li>Ajustes e melhorias em funcionalidades dos sistemas junto com o desenvolvedor</li><li>Trabalho direto com o dev (Scrum/Kanban) e treinamento dos usuários nas entregas</li></ul></div>
   <div class="job"><span class="badge">PASS</span><div class="top"><h3>Suporte de Sistemas</h3><span class="when">set/2022 – dez/2023</span></div><div class="where">Stara S/A · Não-Me-Toque/RS</div><ul class="ck">
    <li>Suporte avançado (N3): investigação com usuários, leitura de logs e reprodução de erros</li><li>Troubleshooting no banco com SQL e correção de dados inconsistentes</li><li>Chamados no GLPI e indicadores no Grafana</li><li>Layouts de impressão térmica em ZPL</li><li>Integração do chão de fábrica com CLPs e OPC UA, com dados em tempo real pro OEE</li></ul></div>
   <div class="job"><span class="badge">PASS</span><div class="top"><h3>Programador CNC</h3><span class="when">ago/2014 – ago/2022</span></div><div class="where">Implementos Agrícolas Jan · Não-Me-Toque/RS</div><ul class="ck"><li>Operação e programação CNC em produção industrial</li><li>Acompanhamento de padrões de qualidade no ambiente fabril</li></ul></div>
@@ -221,9 +221,11 @@ const ISL=[
   <span class="k">// DADOS & SISTEMAS</span><div class="chips"><span>SQL Server</span><span>SQL</span><span>Grafana</span><span>GLPI</span><span>ZPL</span><span>OPC UA / CLPs</span></div>
   <span class="k">// GESTÃO & MANUFATURA</span><div class="chips"><span>Jira</span><span>TestRail</span><span>Scrum</span><span>Kanban</span><span>MES</span><span>LES</span><span>OEE</span></div>`},
  {id:'edu',name:'Ilha da Academia',kick:'cat formacao.json',icon:'🎓',x:-200,z:95,r:25,color:'#3c8a69',ly:24,
-  html:`<div class="job"><span class="badge wip">EM ANDAMENTO</span><h3>Pós-graduação em Engenharia de Software</h3></div>
-  <div class="job"><span class="badge">CONCLUÍDO</span><h3>Análise e Desenvolvimento de Sistemas</h3><div class="where" style="margin:0">ULBRA · 2021 – 2023</div></div>
-  <div class="job"><span class="badge wip">EM ANDAMENTO</span><h3>Inglês</h3><div class="where" style="margin:0">Rockfeller Language Center · 2024 – 2027</div></div>`},
+  html:`<div class="job"><span class="badge wip">CURSANDO</span><h3>Pós em Engenharia de Software · ênfase em Qualidade e Teste de Software</h3><div class="where" style="margin:0">Anhanguera · fev/2026 – dez/2026</div></div>
+  <div class="job"><span class="badge">CONCLUÍDO</span><h3>Análise e Desenvolvimento de Sistemas</h3><div class="where" style="margin:0">ULBRA · concluído em dez/2023</div></div>
+  <div class="job"><span class="badge">CONCLUÍDO</span><h3>Mecânico de Usinagem · Aprendizagem Industrial (1.600 h)</h3><div class="where" style="margin:0">SENAI · 2012 – 2014</div></div>
+  <div class="job"><span class="badge wip">CURSANDO</span><h3>Inglês</h3><div class="where" style="margin:0">Rockfeller Passo Fundo</div></div>
+  <span class="k">// CURSOS COMPLEMENTARES</span><div class="chips"><span>Centros de Usinagem Mazak</span><span>Torno CNC (Fanuc)</span><span>Redes de Computadores</span><span>Rede Microsoft</span><span>Montagem e Manutenção de Computadores</span><span>Hardware</span><span>Lógica de Programação</span><span>TIC · SENAI</span></div>`},
  {id:'contato',name:'Cais do Contato',kick:'git push origin oportunidade',icon:'📬',x:275,z:-175,r:22,color:'#4a9b62',ly:20,
   html:`<p>Chegou até aqui? Então bora testar uma parceria. 😄</p>
   <p>Estou aberto a vagas de <strong>QA</strong>, <strong>Analista de Testes</strong> e <strong>Suporte de Sistemas</strong>: presencial em Não-Me-Toque/RS e região, híbrido ou remoto.</p>
@@ -238,7 +240,7 @@ const RECRUITER={icon:'👔',kick:'resumo em 30 segundos',name:'Modo recrutador'
   <li><strong>Automação</strong>: Cypress, Playwright e Selenium · APIs com Postman e Insomnia</li>
   <li><strong>10 anos de chão de fábrica</strong>: entendo o usuário final da indústria como poucos QAs</li>
   <li>Treinamento de usuários a cada entrega: <strong>comunicação</strong> com dev, produto e operação</li>
-  <li>Formado em <strong>ADS</strong> (ULBRA) · pós em <strong>Engenharia de Software</strong> em andamento</li></ul></div>
+  <li>Formado em <strong>ADS</strong> (ULBRA) · cursando pós em <strong>Engenharia de Software com ênfase em Qualidade e Teste</strong></li></ul></div>
  <div class="box"><span class="k" style="margin-top:0">// PROCURO</span>QA · Analista de Testes · Analista de Suporte de Sistemas</div>
  <div class="btns">${MAIL('✉ Enviar e-mail','btn primary')}<a class="btn${EMAIL?'':' primary'}" href="${LI}" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn" href="${GH}" target="_blank" rel="noopener">GitHub ↗</a><a class="btn" href="cv.html" target="_blank" rel="noopener">📄 CV em PDF</a></div>`};
 
