@@ -1,11 +1,21 @@
-# QA Voyage 3D
+# A Rota dos Bugs
 
-Meu portfólio: https://jardel-mateus.github.io
+Meu portfólio em forma de jogo 3D. Você comanda um navio pirata entre as ilhas, cada ilha conta uma parte da minha história (carreira, projetos, skills, formação) e no caminho tem 8 navios-bug pra afundar no canhão.
 
-Fiz o portfólio em forma de jogo. Você navega de barco entre as ilhas e cada uma mostra uma parte da minha trajetória (sobre, carreira, projetos, skills, formação e contato). Tem 8 bugs escondidos no mar pra achar 🐞
+https://jardel-mateus.github.io
 
-Pra quem tá com pressa tem o modo recrutador (tecla R), o [CV](https://jardel-mateus.github.io/cv.html) e uma [versão sem jogo](https://jardel-mateus.github.io/classic.html).
+## Controles
 
-Feito com HTML, CSS, JavaScript e Three.js.
+- WASD ou setas: navegar
+- Espaço ou F: canhão
+- E: atracar na ilha
+- Shift: turbo
+- N: dia/noite
+- R: modo recrutador
+- No celular tem joystick e botão de disparo
 
-Controles: WASD ou setas pra navegar, E pra atracar, R abre o resumo. No celular aparece um joystick.
+Pra quem tá com pressa tem o modo recrutador, o [CV](https://jardel-mateus.github.io/cv.html) e uma [versão sem jogo](https://jardel-mateus.github.io/classic.html).
+
+## Feito com
+
+Three.js e JavaScript puro. Oceano com shader próprio, física simples do navio, partículas, minimapa em canvas e ciclo de dia e noite.
